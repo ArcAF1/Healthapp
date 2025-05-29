@@ -1,5 +1,6 @@
 
 
+
 /**
  * Implements 80/20 rule for sustainable behavior change
  * Research shows 80% adherence with 20% flexibility has best long-term outcomes
@@ -28,11 +29,13 @@ export interface PlannedIndulgence {
 }
 
 export class RecoveryProtocol {
+
   /**
    * Based on research showing recovery needs vary by indulgence type
    */
   getRecoveryRecommendations(indulgence: PlannedIndulgence): RecoveryPlan {
     const baseRecommendations = {
+
       hydrationMultiplier: 1.0,
       exerciseIntensityReduction: 0,
       sleepTargetIncrease: 0,

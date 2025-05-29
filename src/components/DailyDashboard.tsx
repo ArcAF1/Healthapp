@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import { CircadianSchedule } from '@/lib/circadian';
 
 export function DailyDashboard({
@@ -13,6 +14,7 @@ export function DailyDashboard({
 }) {
   const getLagomMessage = (score: number) => {
     if (score > 0.8) return 'Perfect balance - lagom! 🌟';
+
     if (score > 0.6) return 'Good balance, room to adjust';
     return 'Time to recalibrate';
   };
@@ -32,6 +34,7 @@ export function DailyDashboard({
       <div className="space-y-4">
         {Object.entries(schedule).map(([key, time]) => (
           <div key={key} className="flex justify-between items-center py-2 border-b border-gray-100">
+
             <span className="text-gray-700 capitalize">
               {key.replace(/([A-Z])/g, ' $1').trim()}
             </span>

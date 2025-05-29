@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 
+
 interface StressIndicatorProps {
   level: number;
 }
@@ -15,7 +16,9 @@ export function StressIndicator({ level }: StressIndicatorProps) {
   const getMessage = () => {
     if (level < 4) return 'Well recovered';
     if (level < 7) return 'Moderate stress';
+
     return 'High stress';
+
   };
 
   return (

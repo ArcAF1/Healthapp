@@ -7,10 +7,12 @@
 
 
 
+
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "test": "node test.js"
+
 
 
 
@@ -23,6 +25,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zustand": "4.4.7"
+
   },
   "devDependencies": {
 

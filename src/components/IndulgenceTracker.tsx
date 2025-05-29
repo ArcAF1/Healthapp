@@ -64,6 +64,7 @@ export function IndulgenceTracker({ onSave }: { onSave: (indulgence: PlannedIndu
             className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
         <button
           onClick={() => onSave(indulgence as PlannedIndulgence)}
           className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium"
@@ -71,6 +72,7 @@ export function IndulgenceTracker({ onSave }: { onSave: (indulgence: PlannedIndu
           Save Plan
         </button>
       </div>
+
       <div className="mt-6 p-4 bg-green-50 rounded-lg">
         <p className="text-sm text-green-800">
           💚 Tomorrow's recommendations will automatically adjust for optimal recovery

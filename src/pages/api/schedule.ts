@@ -2,7 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 
 
+
 import { calculateSchedule } from '../../lib/circadian'
+
 
 
 
@@ -14,6 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const [h, m] = wakeParam.split(':').map(Number)
     wake.setHours(h, m, 0, 0)
   }
+
 
 
   const schedule = calculateSchedule(wake, 59.3)

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Leaf, TrendingUp } from 'lucide-react'
 

@@ -15,6 +15,7 @@ export function ProgressPath({ days }: ProgressPathProps) {
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Your Journey</h3>
       <div className="flex items-center gap-1 overflow-x-auto pb-2">
         {days.map((day, index) => {
+
           const height = day.score * 40 + 10; // 10-50px height
           let bgColor = 'bg-blue-400';
           if (day.isRestDay) bgColor = 'bg-green-400';
@@ -24,9 +25,11 @@ export function ProgressPath({ days }: ProgressPathProps) {
           return (
             <div key={index} className="flex flex-col items-center">
               <div className={`w-8 ${bgColor} rounded-t-lg transition-all`} style={{ height: `${height}px` }} />
+
               <span className="text-xs text-gray-500 mt-1">
                 {new Date(day.date).getDate()}
               </span>
+
             </div>
           );
         })}
