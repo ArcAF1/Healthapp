@@ -1,6 +1,13 @@
 import { differenceInMinutes, addMinutes, addHours } from 'date-fns'
 
+
+
+
+
 export interface Schedule {
+
+
+
   coreBodyTempMin: Date
   firstMeal: Date
   lastMeal: Date
@@ -8,7 +15,13 @@ export interface Schedule {
   windDown: Date
 }
 
+
+
+
+
 export function calculateSchedule(wake: Date, latitude: number): Schedule {
+
+
   const coreBodyTempMin = addHours(wake, -2)
 
   // Assume 16h wake period
@@ -34,13 +47,3 @@ export function phaseForTime(wake: Date, now: Date): string {
   return 'evening melatonin rise'
 }
 
-// Simple class wrapper for unified system
-export class CircadianEngine {
-  calculateSchedule(wake: Date, latitude: number = 59.3): Schedule {
-    return calculateSchedule(wake, latitude)
-  }
-
-  phaseForNow(wake: Date, now: Date = new Date()): string {
-    return phaseForTime(wake, now)
-  }
-}

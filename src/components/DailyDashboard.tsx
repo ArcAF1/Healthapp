@@ -1,9 +1,20 @@
 import React from 'react';
-import { Schedule } from '@/lib/circadian';
 
-export function DailyDashboard({ schedule, lagomScore, currentPhase }: { schedule: Schedule; lagomScore: number; currentPhase: string }) {
+
+import { CircadianSchedule } from '@/lib/circadian';
+
+export function DailyDashboard({
+  schedule,
+  lagomScore,
+  currentPhase,
+}: {
+  schedule: CircadianSchedule;
+  lagomScore: number;
+  currentPhase: string;
+}) {
   const getLagomMessage = (score: number) => {
-    if (score > 0.8) return 'Perfect balance - lagom! \u2728';
+    if (score > 0.8) return 'Perfect balance - lagom! 🌟';
+
     if (score > 0.6) return 'Good balance, room to adjust';
     return 'Time to recalibrate';
   };
@@ -23,8 +34,16 @@ export function DailyDashboard({ schedule, lagomScore, currentPhase }: { schedul
       <div className="space-y-4">
         {Object.entries(schedule).map(([key, time]) => (
           <div key={key} className="flex justify-between items-center py-2 border-b border-gray-100">
-            <span className="text-gray-700 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-            <span className="font-medium text-gray-900">{new Date(time as Date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</span>
+
+            <span className="text-gray-700 capitalize">
+              {key.replace(/([A-Z])/g, ' $1').trim()}
+            </span>
+            <span className="font-medium text-gray-900">
+              {new Date(time).toLocaleTimeString('sv-SE', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </span>
           </div>
         ))}
       </div>
