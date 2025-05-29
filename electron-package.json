@@ -1,0 +1,27 @@
+{
+  "name": "halsa-lagom-desktop",
+  "version": "1.0.0",
+  "main": "electron-wrapper.js",
+  "scripts": {
+    "start": "electron .",
+    "build-mac": "electron-builder --mac",
+    "build-win": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "build": {
+    "appId": "com.halsalagom.app",
+    "productName": "H\u00e4lsa Lagom",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.healthcare-fitness"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
