@@ -1,6 +1,11 @@
 import { differenceInMinutes, addMinutes, addHours } from 'date-fns'
 
+
+
+
 export interface Schedule {
+
+
   coreBodyTempMin: Date
   firstMeal: Date
   lastMeal: Date
@@ -8,7 +13,12 @@ export interface Schedule {
   windDown: Date
 }
 
+
+
+
 export function calculateSchedule(wake: Date, latitude: number): Schedule {
+
+
   const coreBodyTempMin = addHours(wake, -2)
 
   // Assume 16h wake period

@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+
+
+
+
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "electron": "electron electron-wrapper.js",
-    "build-desktop-mac": "npm run build && electron-builder --mac",
-    "build-desktop-win": "npm run build && electron-builder --win",
     "test": "node test.js"
+
+
+
   },
   "dependencies": {
     "@supabase/supabase-js": "2.39.7",
@@ -21,6 +25,10 @@
     "zustand": "4.4.7"
   },
   "devDependencies": {
+
+
+
+
     "ts-node": "10.9.2",
     "typescript": "5.8.3"
   }

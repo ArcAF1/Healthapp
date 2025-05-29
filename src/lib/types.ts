@@ -1,3 +1,8 @@
+
+
+
+
+
 export type Chronotype = 'morning' | 'evening' | 'intermediate'
 
 export interface UserProfile {
@@ -11,6 +16,11 @@ export interface UserProfile {
 }
 
 export interface DailyMetrics {
+
+
+
+
+
   circadianAlignment: number // 0-100
   metabolicFlexibility: number // 0-100
   greenExerciseMinutes: number

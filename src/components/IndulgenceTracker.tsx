@@ -1,51 +1,81 @@
 import React, { useState } from 'react';
-import { Wine, Pizza, Coffee, Moon } from 'lucide-react';
+import { PlannedIndulgence } from '@/lib/flexibility';
 
-interface IndulgenceTrackerProps {
-  onSave: (indulgence: any) => void;
-}
-
-export function IndulgenceTracker({ onSave }: IndulgenceTrackerProps) {
-  const [selectedType, setSelectedType] = useState('');
-
-  const indulgenceTypes = [
-    { id: 'cheat-meal', label: 'Favorite Meal', icon: Pizza, color: 'text-orange-600' },
-    { id: 'alcohol', label: 'Social Drinks', icon: Wine, color: 'text-purple-600' },
-    { id: 'late-night', label: 'Late Night', icon: Moon, color: 'text-indigo-600' },
-    { id: 'extra-coffee', label: 'Extra Coffee', icon: Coffee, color: 'text-amber-700' },
-  ];
+export function IndulgenceTracker({ onSave }: { onSave: (indulgence: PlannedIndulgence) => void }) {
+  const [indulgence, setIndulgence] = useState<Partial<PlannedIndulgence>>({
+    type: 'cheat-meal',
+    intensity: 'moderate',
+    date: new Date(),
+  });
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
+    <div className="bg-white rounded-xl shadow-sm p-6 max-w-md mx-auto">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">
-        Plan Ahead, Enjoy Guilt-Free
+        Plan Your Indulgence
       </h3>
-      
-      <div className="grid grid-cols-2 gap-3">
-        {indulgenceTypes.map(({ id, label, icon: Icon, color }) => (
-          <button
-            key={id}
-            onClick={() => setSelectedType(id)}
-            className={`p-4 rounded-lg border-2 transition-all flex flex-col items-center gap-2 ${
-              selectedType === id
-                ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-200 hover:border-gray-300'
-            }`}
+      <p className="text-sm text-gray-600 mb-6">
+        Life is about balance. Planning ahead helps you enjoy without guilt.
+      </p>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Type
+          </label>
+          <select
+            value={indulgence.type}
+            onChange={(e) => setIndulgence({ ...indulgence, type: e.target.value as any })}
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
           >
-            <Icon className={`w-6 h-6 ${color}`} />
-            <span className="text-sm font-medium">{label}</span>
-          </button>
-        ))}
-      </div>
-
-      {selectedType && (
+            <option value="cheat-meal">Favorite Meal 🍕</option>
+            <option value="alcohol">Drinks with Friends 🍷</option>
+            <option value="rest-day">Full Rest Day 🛋️</option>
+            <option value="late-night">Late Night Out 🌙</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Intensity
+          </label>
+          <div className="flex gap-2">
+            {['light', 'moderate', 'heavy'].map((intensity) => (
+              <button
+                key={intensity}
+                onClick={() => setIndulgence({ ...indulgence, intensity: intensity as any })}
+                className={`flex-1 py-2 px-4 rounded-lg border transition-colors ${
+                  indulgence.intensity === intensity
+                    ? 'bg-blue-50 border-blue-500 text-blue-700'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                {intensity.charAt(0).toUpperCase() + intensity.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Notes (optional)
+          </label>
+          <input
+            type="text"
+            placeholder="Birthday party, date night, etc."
+            value={indulgence.notes || ''}
+            onChange={(e) => setIndulgence({ ...indulgence, notes: e.target.value })}
+            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
         <button
-          onClick={() => onSave({ type: selectedType, date: new Date() })}
-          className="w-full mt-4 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
+          onClick={() => onSave(indulgence as PlannedIndulgence)}
+          className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium"
         >
-          Schedule for Today
+          Save Plan
         </button>
-      )}
+      </div>
+      <div className="mt-6 p-4 bg-green-50 rounded-lg">
+        <p className="text-sm text-green-800">
+          💚 Tomorrow's recommendations will automatically adjust for optimal recovery
+        </p>
+      </div>
     </div>
   );
 }

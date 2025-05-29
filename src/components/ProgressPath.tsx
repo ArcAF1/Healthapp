@@ -10,39 +10,41 @@ interface ProgressPathProps {
 }
 
 export function ProgressPath({ days }: ProgressPathProps) {
-  const mockDays = days?.length > 0 ? days : Array.from({ length: 7 }, (_, i) => ({
-    date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000),
-    score: 0.6 + Math.random() * 0.3,
-    hasIndulgence: i === 5,
-    isRestDay: i === 3,
-  }));
-
   return (
     <div className="bg-white rounded-xl shadow-sm p-6">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Your Week</h3>
-      
-      <div className="flex items-end gap-1 h-24">
-        {mockDays.map((day, index) => {
-          const height = day.score * 100;
+      <h3 className="text-lg font-semibold text-gray-800 mb-4">Your Journey</h3>
+      <div className="flex items-center gap-1 overflow-x-auto pb-2">
+        {days.map((day, index) => {
+          const height = day.score * 40 + 10; // 10-50px height
           let bgColor = 'bg-blue-400';
-          
           if (day.isRestDay) bgColor = 'bg-green-400';
           else if (day.hasIndulgence) bgColor = 'bg-purple-400';
           else if (day.score > 0.8) bgColor = 'bg-blue-500';
-          
+          else if (day.score < 0.5) bgColor = 'bg-gray-300';
           return (
-            <div key={index} className="flex-1 flex flex-col items-center">
-              <div
-                className={`w-full ${bgColor} rounded-t transition-all`}
-                style={{ height: `${height}%` }}
-              />
+            <div key={index} className="flex flex-col items-center">
+              <div className={`w-8 ${bgColor} rounded-t-lg transition-all`} style={{ height: `${height}px` }} />
               <span className="text-xs text-gray-500 mt-1">
-                {['M', 'T', 'W', 'T', 'F', 'S', 'S'][index]}
+                {new Date(day.date).getDate()}
               </span>
             </div>
           );
         })}
       </div>
+      <div className="flex gap-4 mt-4 text-xs">
+        <span className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-blue-500 rounded" /> Progress
+        </span>
+        <span className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-green-400 rounded" /> Rest
+        </span>
+        <span className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-purple-400 rounded" /> Planned Indulgence
+        </span>
+      </div>
+      <p className="text-sm text-gray-600 mt-4">
+        Remember: The path to health isn't a straight line. Every day counts, including rest and celebration.
+      </p>
     </div>
   );
 }
