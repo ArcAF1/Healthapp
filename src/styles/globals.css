@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 59 130 246;
+    --color-secondary: 34 197 94;
+    --color-accent: 168 85 247;
+  }
+
+  body {
+    @apply text-gray-900 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  * {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .bg-swedish-blue { background-color: #005293; }
+  .bg-swedish-yellow { background-color: #FFCD00; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  .gradient-forest { @apply bg-gradient-to-br from-green-400 to-green-600; }
+  .gradient-sky { @apply bg-gradient-to-br from-blue-400 to-blue-600; }
+  .gradient-aurora { @apply bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400; }
+}

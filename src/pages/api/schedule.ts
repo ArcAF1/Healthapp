@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+
 import { calculateSchedule } from '../../lib/circadian'
+
 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -12,6 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const schedule = calculateSchedule(wake, 59.3)
+
 
   res.status(200).json(schedule)
 }

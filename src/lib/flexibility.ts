@@ -1,4 +1,5 @@
 
+
 /**
  * Implements 80/20 rule for sustainable behavior change
  * Research shows 80% adherence with 20% flexibility has best long-term outcomes
