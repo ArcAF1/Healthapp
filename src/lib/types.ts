@@ -1,42 +1,23 @@
-import type { PlannedIndulgence } from './flexibility'
 
 export type Chronotype = 'morning' | 'evening' | 'intermediate'
-
-export interface UserPreferences {
-  flexibilityMode: 'strict' | 'balanced' | 'flexible'
-  plannedIndulgenceDays: string[]
-  alcoholPreference: 'none' | 'occasional' | 'moderate'
-  stressManagement: ('exercise' | 'meditation' | 'social' | 'nature')[]
-  outdoorActivity?: string[]
-  dietaryRestrictions?: string[]
-}
 
 export interface UserProfile {
   chronotype: Chronotype
   location: { lat: number; lng: number }
-  preferences: UserPreferences
-}
-
-export interface RecoveryStatus {
-  isRecovering: boolean
-  recoveryType: 'alcohol' | 'overtraining' | 'stress' | 'illness'
-  recoveryDay: number
-  adjustments: {
-    exerciseIntensity: number
-    targetCalories: number
-    hydrationTarget: number
+  preferences: {
+    outdoorActivity: string[]
+    dietaryRestrictions: string[]
+    stressManagement: ('meditation' | 'exercise' | 'nature' | 'social')[]
   }
 }
 
 export interface DailyMetrics {
-  date: Date
-  circadianAlignment: number
-  metabolicFlexibility: number
+
+  circadianAlignment: number // 0-100
+  metabolicFlexibility: number // 0-100
   greenExerciseMinutes: number
-  stressLevel: number
-  lagomScore: number
-  indulgences: PlannedIndulgence[]
-  recoveryStatus?: RecoveryStatus
+  stressLevel: number // 0-10
+  lagomScore: number // rewards consistency
 }
 
 export interface Recommendation {

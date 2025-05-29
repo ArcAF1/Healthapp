@@ -1,53 +1,35 @@
-import { useState, useEffect } from 'react';
-import { DailyDashboard } from '@/components/DailyDashboard';
-import { IndulgenceTracker } from '@/components/IndulgenceTracker';
-import { ProgressPath } from '@/components/ProgressPath';
-import { calculateCircadianSchedule } from '@/lib/circadian';
-import { saveIndulgence } from '@/lib/supabase';
+
+import { useState } from 'react'
+import { calculateSchedule, phaseForTime } from '../lib/circadian'
 
 export default function Home() {
-  const [schedule, setSchedule] = useState<any>(null);
-  const [healthData, setHealthData] = useState({
-    lagomScore: 0.85,
-    currentPhase: 'Morning Peak',
-  });
-
-  useEffect(() => {
-    const wakeTime = new Date();
-    wakeTime.setHours(6, 0, 0, 0);
-    const newSchedule = calculateCircadianSchedule(wakeTime, 59.3);
-    setSchedule(newSchedule);
-  }, []);
-
-  const handleIndulgenceSave = async (indulgence: any) => {
-    await saveIndulgence('user-id', indulgence);
-    console.log('Indulgence planned:', indulgence);
-  };
-
-  if (!schedule) return <div>Loading...</div>;
+  const [wakeTime, setWakeTime] = useState('07:00')
+  const wake = new Date()
+  const [h, m] = wakeTime.split(':').map(Number)
+  wake.setHours(h, m, 0, 0)
+  const schedule = calculateSchedule(wake, 59.3)
+  const phase = phaseForTime(wake, new Date())
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Swedish Health Tracker</h1>
-        <div className="grid md:grid-cols-2 gap-6">
-          <DailyDashboard
-            schedule={schedule}
-            lagomScore={healthData.lagomScore}
-            currentPhase={healthData.currentPhase}
-          />
-          <IndulgenceTracker onSave={handleIndulgenceSave} />
-        </div>
-        <div className="mt-8">
-          <ProgressPath
-            days={[
-              { date: new Date(), score: 0.8, hasIndulgence: false, isRestDay: false },
-              { date: new Date(), score: 0.7, hasIndulgence: true, isRestDay: false },
-              { date: new Date(), score: 0.9, hasIndulgence: false, isRestDay: true },
-            ]}
-          />
-        </div>
-      </div>
-    </div>
-  );
+    <main className="p-4 font-sans">
+      <h1 className="text-xl mb-2">Circadian Schedule</h1>
+      <label>
+        Wake Time:
+        <input
+          type="time"
+          value={wakeTime}
+          onChange={(e) => setWakeTime(e.target.value)}
+          className="border ml-2"
+        />
+      </label>
+      <ul className="mt-4 space-y-1">
+        <li>Core Temp Min: {schedule.coreBodyTempMin.toLocaleTimeString()}</li>
+        <li>First Meal: {schedule.firstMeal.toLocaleTimeString()}</li>
+        <li>Last Meal: {schedule.lastMeal.toLocaleTimeString()}</li>
+        <li>Exercise: {schedule.exercise.toLocaleTimeString()}</li>
+        <li>Wind Down: {schedule.windDown.toLocaleTimeString()}</li>
+      </ul>
+      <p className="mt-4">Current Phase: {phase}</p>
+    </main>
+  )
 }

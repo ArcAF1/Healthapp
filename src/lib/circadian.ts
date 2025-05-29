@@ -1,6 +1,8 @@
 import { differenceInMinutes, addMinutes, addHours } from 'date-fns'
 
-export interface CircadianSchedule {
+
+export interface Schedule {
+
   coreBodyTempMin: Date
   firstMeal: Date
   lastMeal: Date
@@ -8,7 +10,9 @@ export interface CircadianSchedule {
   windDown: Date
 }
 
-export function calculateCircadianSchedule(wake: Date, latitude: number): CircadianSchedule {
+
+export function calculateSchedule(wake: Date, latitude: number): Schedule {
+
   const coreBodyTempMin = addHours(wake, -2)
 
   // Assume 16h wake period
